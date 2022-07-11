@@ -25,7 +25,7 @@ const AppProvider =({children}) =>{
     const fetchQuestions =async(url) =>{
         setLoading(true);
         setwaiting(false);
-        const response = await axios("https://opentdb.com/api.php?amount=10").catch((err)=> console.log(err))
+        const response = await axios(url).catch((err)=> console.log(err))
         if(response){
             const data = response.data.results;
             if(data.length){
@@ -43,6 +43,40 @@ const AppProvider =({children}) =>{
         }
     }
 
+    const openModal = ()=> {
+        setModal(true);
+    };
+    const closeModal = ()=> {
+        setModal(false);
+        setwaiting(true);
+        setCorrect(0);
+    };
+
+    const nextQuestion = () =>{
+        setIndex((oldIndex)=>{
+            const index = oldIndex+1;
+            if(index > oldIndex.length -1){
+                openModal()
+                return 0;
+            }else{
+                return index;
+            }
+        })
+    }
+
+    const checkAnswers = (value) => {
+        if(value) {
+            setCorrect((oldState) => oldState +1);
+        }
+        nextQuestion();
+    }
+
+    const handleChange = (e) =>{
+        const name = e.target.name;
+        const value = e.taget.value;
+        setQuiz({...quiz,[name]: value});
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const {amount, difficulty,category} = quiz;
@@ -51,11 +85,10 @@ const AppProvider =({children}) =>{
     }
 
 
-    return(
-        <AppContext.Provider>
-            {children}
-        </AppContext.Provider>
-    )
+    return <AppContext.Provider value={{
+        waiting, loading, question, index, correct, error, modal, nextQuestion, checkAnswers, closeModal, quiz, handleChange, handleSubmit
+    }}> {children} </AppContext.Provider>
+    
 };
 
 export const useGlobalContext= () =>{
