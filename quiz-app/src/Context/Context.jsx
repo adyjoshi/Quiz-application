@@ -2,6 +2,10 @@ import { useState , useContext , createContext } from "react";
 import axios from "axios";
 
 const table ={
+    //to add more trivia options and context go to this website and add different options,
+    // https://opentdb.com/api_config.php 
+    //in this case the number is specific to the trivia code.
+    //in this case the number is specific to the trivia code.
     sports:21, history:23, politics:24
 };
 
