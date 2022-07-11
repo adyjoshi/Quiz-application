@@ -2,7 +2,7 @@ import { useState , useContext , createContext } from "react";
 import axios from "axios";
 
 const table ={
-    sports:19, history:23, politics:24
+    sports:21, history:23, politics:24
 };
 
 const AppContext = createContext();
@@ -28,7 +28,7 @@ const AppProvider =({children}) =>{
         const response = await axios(url).catch((err)=> console.log(err))
         if(response){
             const data = response.data.results;
-            if(data.length){
+            if(data.length>0){
                 setQuestions(data);
                 setLoading(false);
                 setwaiting(false);
@@ -55,7 +55,7 @@ const AppProvider =({children}) =>{
     const nextQuestion = () =>{
         setIndex((oldIndex)=>{
             const index = oldIndex+1;
-            if(index > oldIndex.length -1){
+            if(index > questions.length -1){
                 openModal()
                 return 0;
             }else{
@@ -73,7 +73,7 @@ const AppProvider =({children}) =>{
 
     const handleChange = (e) =>{
         const name = e.target.name;
-        const value = e.taget.value;
+        const value = e.target.value;
         setQuiz({...quiz,[name]: value});
     }
 
