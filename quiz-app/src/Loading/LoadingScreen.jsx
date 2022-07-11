@@ -1,6 +1,4 @@
-const { ExposureOutlined } = require("@material-ui/icons");
-
-const Loading = () => {
+const Loading = () =>{
     return(
         <main>
             <div className="loading">

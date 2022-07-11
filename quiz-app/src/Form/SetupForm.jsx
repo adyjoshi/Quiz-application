@@ -6,7 +6,7 @@ const SetupForm =() =>{
                     <h2>Setup quiz</h2>
                     <div className="form-control">
                         <label htmlFor="amount">number of questions</label>
-                        <input type="number" name="amount" id="amount" className="form-input"/>
+                        <input type="number" name="amount" id="amount" className="form-input" min={1} max={50}/>
                     </div>
                     <div className="form-control">
                         <label htmlFor="category">category</label>
@@ -19,7 +19,7 @@ const SetupForm =() =>{
                     <div className="form-control">
                         <label htmlFor="difficulty">difficulty</label>
                         <select name="difficulty" id="difficulty" className="form-input">
-                            <option value="easy">easy</option>
+                            <option value="ease">ease</option>
                             <option value="medium">medium</option>
                             <option value="difficult">difficult</option>
                         </select>
