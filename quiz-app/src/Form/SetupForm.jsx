@@ -19,7 +19,7 @@ const SetupForm =() =>{
                     <div className="form-control">
                         <label htmlFor="difficulty">difficulty</label>
                         <select name="difficulty" id="difficulty" className="form-input">
-                            <option value="ease">ease</option>
+                            <option value="easy">easy</option>
                             <option value="medium">medium</option>
                             <option value="difficult">difficult</option>
                         </select>

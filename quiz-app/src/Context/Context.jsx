@@ -1,5 +1,5 @@
 import { useState , useContext , createContext } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 const table ={
     sports:19, history:23, politics:24
@@ -10,14 +10,14 @@ const AppProvider =({children}) =>{
     
     const [waiting, setwaiting] = useState(true) //waiting
     const [loading, setLoading] = useState(false) //loading
-    const [question, setQuestions] = useState([]) //questions
+    const [questions, setQuestions] = useState([]) //questions
     const [index, setIndex] = useState(0) //index
     const [correct, setCorrect] = useState(0) //correct
     const [error, setError] = useState(false)//error
     const [quiz, setQuiz] = useState({
         amount:10,
         category:"sports",
-        difficuty:"ease"
+        difficuty:"easy"
     }); //quiz
     const [modal, setModal] = useState(false)//Modal
     //fetchquestions
@@ -86,7 +86,7 @@ const AppProvider =({children}) =>{
 
 
     return <AppContext.Provider value={{
-        waiting, loading, question, index, correct, error, modal, nextQuestion, checkAnswers, closeModal, quiz, handleChange, handleSubmit
+        waiting, loading, questions, index, correct, error, modal, nextQuestion, checkAnswers, closeModal, quiz, handleChange, handleSubmit
     }}> {children} </AppContext.Provider>
     
 };
