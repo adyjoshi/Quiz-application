@@ -13,6 +13,17 @@ function App(){
   if(loading){
     return <loading/>;
   }
+
+  const{incorrect_answers, correct_answer, question} =questions[index]
+  let answers = [...incorrect_answers];
+  const tempIndex = Math.floor(math.random()*4) //we are shuffling up the answers 
+  if(tempIndex ===3){
+    answers.push(correct_answer)
+  }else{
+      answers.push(answers[tempIndex]);
+      answers[tempIndex] = correct_answer;
+  }
+
   return(
   <main>
     <section className="quiz">
