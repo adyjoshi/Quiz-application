@@ -5,8 +5,7 @@ import {useGlobalContext} from "./Context/Context.jsx"
 
 function App(){
   const {
-    waiting, loading, questions, index, correct, nextQuestions, checkAnswer
-  } = useGlobalContext();
+    waiting, loading, questions, index, correct, nextQuestions, checkAnswer } = useGlobalContext();
   if(waiting){
     return <SetupForm/>;
   }
@@ -16,7 +15,7 @@ function App(){
 
   const{incorrect_answers, correct_answer, question} =questions[index]
   let answers = [...incorrect_answers];
-  const tempIndex = Math.floor(math.random()*4) //we are shuffling up the answers 
+  const tempIndex = Math.floor(Math.random()*4) //we are shuffling up the answers 
   if(tempIndex ===3){
     answers.push(correct_answer)
   }else{
@@ -27,12 +26,21 @@ function App(){
   return(
   <main>
     <section className="quiz">
-      <p className="correct-answers">correct answers: 3</p>
+      <p className="correct-answers">correct answers: {correct}/{index})</p>
       <article className="container">
-        <h2>Text</h2>
-        <div className="btn-container"></div>
+        <h2 dangerouslySetInnerHTML={{__html: question}}/>
+        <div className="btn-container">
+          {answers.map((answer, index) => {
+            return(
+                <button key={index} 
+                className="answer-btn"
+                onClick={()=>checkAnswer(correct_answer ===answer)} 
+                dangerouslySetInnerHTML={{__html:answer}}/>
+            );
+          })}
+        </div>
       </article>
-      <button className="next-question">next questions</button>
+      <button className="next-question" onClick={nextQuestions}>next questions</button>
     </section>
   </main>
   );
