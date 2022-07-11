@@ -5,12 +5,12 @@ import {useGlobalContext} from "./Context/Context.jsx"
 
 function App(){
   const {
-    waiting, loading, questions, index, correct, nextQuestions, checkAnswer } = useGlobalContext();
+    waiting, loading, questions, index, correct, nextQuestions, checkAnswers } = useGlobalContext();
   if(waiting){
     return <SetupForm/>;
   }
   if(loading){
-    return <loading/>;
+    return <Loading/>;
   }
 
   const{incorrect_answers, correct_answer, question} =questions[index]
@@ -25,8 +25,10 @@ function App(){
 
   return(
   <main>
+    <Modal />
     <section className="quiz">
-      <p className="correct-answers">correct answers: {correct}/{index})</p>
+      <p className="correct-answers">
+        correct answers: {correct}/{index})</p>
       <article className="container">
         <h2 dangerouslySetInnerHTML={{__html: question}}/>
         <div className="btn-container">
@@ -34,7 +36,7 @@ function App(){
             return(
                 <button key={index} 
                 className="answer-btn"
-                onClick={()=>checkAnswer(correct_answer ===answer)} 
+                onClick={()=>checkAnswers(correct_answer === answer)} 
                 dangerouslySetInnerHTML={{__html:answer}}/>
             );
           })}
