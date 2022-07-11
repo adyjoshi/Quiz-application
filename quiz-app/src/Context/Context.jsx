@@ -1,6 +1,10 @@
 import { useState , useContext , createContext } from "react";
 import axios from 'axios';
 
+const table ={
+    sports:19, history:23, politics:24
+};
+
 const AppContext = createContext();
 const AppProvider =({children}) =>{
     
@@ -18,7 +22,7 @@ const AppProvider =({children}) =>{
     const [modal, setModal] = useState(false)//Modal
     //fetchquestions
 
-    const fetchQuestions =async() =>{
+    const fetchQuestions =async(url) =>{
         setLoading(true);
         setwaiting(false);
         const response = await axios("https://opentdb.com/api.php?amount=10").catch((err)=> console.log(err))
@@ -38,6 +42,14 @@ const AppProvider =({children}) =>{
             setwaiting(true);
         }
     }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const {amount, difficulty,category} = quiz;
+        const url = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&category=${table[category]}&type=multiple`;
+        fetchQuestions(url)
+    }
+
 
     return(
         <AppContext.Provider>
